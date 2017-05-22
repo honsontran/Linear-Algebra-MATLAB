@@ -1,0 +1,354 @@
+% Honson Tran
+% 9179
+% Section C2
+% Math 250 MATLAB Lab Assignment #4
+format compact
+% Question 1
+rand('seed', 9179)
+A = rmat(3,2)
+A =
+     9     4
+     7     6
+     2     0
+rank(A)
+ans =
+     2
+% Question 1(a)
+u = A(:,1)
+u =
+     9
+     7
+     2
+v = A(:,2)
+v =
+     4
+     6
+     0
+[s,t] = meshgrid((-1:0.1:1), (-1:0.1:1));
+X = s*u(1)+t*v(1); Y = s*u(2)+t*v(2); Z = s*u(3)+t*v(3);
+surf(X,Y,Z); axis square; colormap hot, hold on
+% Question 1(b)
+b = rvect(3)
+b =
+     4
+     7
+     3
+r = -1:0.05:1;
+plot3(r*b(1),r*b(2),r*b(3))
+% Question 1(c)
+% Our entire line does not go through Col(A)
+% Therefore, Ax=b has no solution because the
+% entire line span does not lie on Col(A).
+% Question 1(d)
+z = rand(2,1), c=A*z
+z =
+    0.5469
+    0.9575
+c =
+    8.7520
+    9.5732
+    1.0938
+figure, surf(X,Y,Z); axis square; colormap hot, hold on
+plot3(r*c(1),r*c(2),r*c(3), '+')
+% In here, Ax=c is able to be solved because the entire
+% line Span(b) lies on on Col(A).
+% Question 2
+B = rmat(3,3), rank(B)
+B =
+     9     9     1
+     1     4     4
+     9     8     9
+ans =
+     3
+A = [B(:,1), B(:,2), 2*B(:,1) + 3*B(:,2), 4*B(:,1) - 5*B(:,2), B(:,3)],
+A =
+     9     9    45    -9     1
+     1     4    14   -16     4
+     9     8    42    -4     9
+R = rref(A)
+R =
+     1     0     2     4     0
+     0     1     3    -5     0
+     0     0     0     0     1
+% Question 2(a)
+% The pivot columns of R are the columns of A that are
+% not linear combinations with any other column in R.
+% According to the Column Correspondence Property, if
+% column j or R is a linear combination of other columns
+% of R, and R is the RREF of A, then column j is a linear
+% combination of the corresponding columns of A using the
+% same coefficients. Because of this, since columns 3 and 
+% 4 are linear combinations of 1 and 2 of A, the pivot columns
+% are the other columns (1, 2 and 5).
+% Question 2(b)
+% i) The free variables in Ax=0 are x_3 and x_4.
+% ii) dim(V) would be 3 since there are 3 pivot columns in A.
+% Question 2(c)
+N = nulbasis(A)
+N =
+    -2    -4
+    -3     5
+     1     0
+     0     1
+     0     0
+v1 = N(:,1), v2 = N(:,2)
+v1 =
+    -2
+    -3
+     1
+     0
+     0
+v2 =
+    -4
+     5
+     0
+     1
+     0
+% The 4th and 5th components of v1 are 0.
+% The 3rd and 5th components of v2 are 0.
+% Question 2(d)
+s = rand(1), t = rand(1), x = s*v1 + t*v2
+s =
+    0.7922
+t =
+    0.9595
+x =
+   -5.4224
+    2.4208
+    0.7922
+    0.9595
+         0
+% x also satisfies Rx=0 because if x satisfies the equation Ax=0 in nullspace A,
+% and R is the rref of A, so this means x is also in the nullspace of R.
+% Question 3
+%Question 3(a)
+A = rmat(5, 3), R = rref(A)
+A =
+     6     7     7
+     0     7     0
+     8     3     2
+     9     6     0
+     6     1     0
+R =
+     1     0     0
+     0     1     0
+     0     0     1
+     0     0     0
+     0     0     0
+rank(A)
+ans =
+     3
+% Theorem 1.6 states the equation Ax=b has at least one solution for every b
+% (that is, Ax=b is consistent) for each b in R^m. Since rank(A) is lower than
+% R^5, it is likely Ax=b will not be consistent for every b in R^m.
+b = rmat(5,1), xp = partic(A, b)
+b =
+     8
+     6
+     3
+     9
+     0
+xp =
+     []
+b = rand(1)*A(:,1) + rand(1)*A(:,2) + rand(1)*A(:,3)
+b =
+   10.6620
+    2.6709
+    6.1857
+    6.2380
+    3.0140
+xp = partic(A, b)
+xp =
+    0.4387
+    0.3816
+    0.7655
+A*xp = b
+ A*xp = b
+      
+{Error: The expression to the left of the
+equals sign is not a valid target for an
+assignment.
+} 
+A*xp
+ans =
+   10.6620
+    2.6709
+    6.1857
+    6.2380
+    3.0140
+b
+b =
+   10.6620
+    2.6709
+    6.1857
+    6.2380
+    3.0140
+% The special form of this b guarantees that there is a solutioin for Ax=b
+% because b is a linear combination of the A's columns, so Ax=b is consistent. % Question 3(b)
+A = rmat(3, 5), R = rref(A)
+A =
+     7     4     7     6     4
+     1     6     2     1     9
+     4     7     6     1     3
+R =
+    1.0000         0         0    2.8605    4.9070
+         0    1.0000         0    0.4419    2.6279
+         0         0    1.0000   -2.2558   -5.8372
+rank(A)
+ans =
+     3
+% Since Ax=b, the number of variables in the solution must equal the
+% the rank of A. We know rank(A) is 3, so we know there must be a solution
+% for every vector in R^3.
+b = rmat(3,1), xp = partic(A, b)
+b =
+     5
+     2
+     7
+xp =
+   -1.8140
+   -0.2558
+    2.6744
+         0
+         0
+% Entries in row 4 and 4 of xp are zero because they are
+% inconsistent and have no general solutioin to Ax=b
+A*xp
+ans =
+    5.0000
+    2.0000
+    7.0000
+b
+b =
+     5
+     2
+     7
+% Question 4
+% Question 4(a)
+N = nulbasis(A)
+N =
+   -2.8605   -4.9070
+   -0.4419   -2.6279
+    2.2558    5.8372
+    1.0000         0
+         0    1.0000
+v1 = N(:,1), v2 = N(:,2)
+v1 =
+   -2.8605
+   -0.4419
+    2.2558
+    1.0000
+         0
+v2 =
+   -4.9070
+   -2.6279
+    5.8372
+         0
+    1.0000
+x = xp + rand(1)*v1 + rand(1)*v2
+% Question 4(b)
+x =
+   -5.0264
+   -1.6981
+    6.2032
+    0.2551
+    0.5060
+% Question 4(b)
+x=xp-9*v1+8*v2
+x =
+  -15.3256
+  -17.3023
+   29.0698
+   -9.0000
+    8.0000
+A*x
+ans =
+    5.0000
+    2.0000
+    7.0000
+b
+b =
+     5
+     2
+     7
+% Question 5(a)
+A=[.3,0;.14,0;.56,1]
+A =
+    0.3000         0
+    0.1400         0
+    0.5600    1.0000
+B=[.5,0,0;.5,1,.6;0,0,.4]
+B =
+    0.5000         0         0
+    0.5000    1.0000    0.6000
+         0         0    0.4000
+C=[1,.3,0;0,.2,0;0,.35,.7;0,.15,.3]
+C =
+    1.0000    0.3000         0
+         0    0.2000         0
+         0    0.3500    0.7000
+         0    0.1500    0.3000
+M=C*B*A
+M =
+    0.3378    0.1800
+    0.1252    0.1200
+    0.3759    0.4900
+    0.1611    0.2100
+x = 1000*rvect(2), y = A*x, z = B*y, w = C*z
+x =
+        9000
+        5000
+y =
+   1.0e+04 *
+    0.2700
+    0.1260
+    1.0040
+z =
+        1350
+        8634
+        4016
+w =
+   1.0e+03 *
+    3.9402
+    1.7268
+    5.8331
+    2.4999
+[1 1]*x, [1 1 1]*y, [1 1 1]*z, [1 1 1 1]*w
+ans =
+       14000
+ans =
+       14000
+ans =
+       14000
+ans =
+       14000
+% This shows that 14000 vehicles enter one way streets ([1 1]*x).
+% 14000 vehicles move across intersections [1 1 1]*y).
+% 14000 vehicles exit ([1 1 1 1]*w). Which makes sense that the amount of
+% vehicles that go in will also exit if there are no accidents.
+% Question 5(b)
+y=[270 126 704]'
+y =
+   270
+   126
+   704
+rref([A y])
+ans =
+     1     0   900
+     0     1   200
+     0     0     0
+% This shows that Ax=y is consistent, so there is a unique x for the given  y.
+% Question 5(c)
+w = [100 200 300 400]'
+w =
+   100
+   200
+   300
+   400
+rref([C w])
+ans =
+     1     0     0     0
+     0     1     0     0
+     0     0     1     0
+     0     0     0     1
+% RREF shows it's inconsistent, so there is no unique x.

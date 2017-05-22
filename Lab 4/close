@@ -1,0 +1,49 @@
+diary lab4.txt
+A = [9     4;
+     7     6;
+     2     0]
+A =
+     9     4
+     7     6
+     2     0
+u = A(:,1)
+u =
+     9
+     7
+     2
+v = A(:,2)
+v =
+     4
+     6
+     0
+b = rvect(3)
+b =
+     1
+     9
+     6
+b = [1;4;6]
+b =
+     1
+     4
+     6
+r = -1:0.05:1;
+diary lab4.txt
+diary lab4.txt
+diary lab4.txt
+figure, surf(X,Y,Z); axis square; colormap hot, hold on
+plot3(r*c(1),r*c(2),r*c(3), '+')
+clc
+diary lab4.txt
+clc
+diary lab4.txt
+diary lab4.txt
+diary lab4.txt
+diary lab4.txt
+clc
+diary lab4.txt
+diary lab4.txt
+clc
+diary lab4.txt
+clc
+diary lab4.txt
+diary lab4.txt

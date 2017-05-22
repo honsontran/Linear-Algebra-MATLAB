@@ -1,0 +1,573 @@
+Quesiton 1 (a)
+R = rref([A b])
+
+R =
+
+    1.0000         0         0    0.3305   -0.1410    0.7991
+         0    1.0000         0    0.2821    0.9615    0.8846
+         0         0    1.0000    0.6068    0.0385   -0.2179
+
+S = rref(A)
+
+S =
+
+    1.0000         0         0    0.3305   -0.1410
+         0    1.0000         0    0.2821    0.9615
+         0         0    1.0000    0.6068    0.0385
+
+b
+
+b =
+
+     7
+     9
+     6
+
+A
+
+A =
+
+     9     2     9     9     1
+     6     5     1     4     4
+     0     9     9     8     9
+
+S = R(:,1:5)
+
+S =
+
+    1.0000         0         0    0.3305   -0.1410
+         0    1.0000         0    0.2821    0.9615
+         0         0    1.0000    0.6068    0.0385
+
+(i) Which columns of S are the pivot columns?
+3
+(ii) Which variables x, are the free variables?
+2
+(iii) What is the rank of R?
+3
+(iv) What is the rank of A?
+3
+(v) What is the nullity of A?
+1
+(vi) Why does the equation Ax = b have a solution?
+THe reason why Ax=b has a solution is b/c when you do the Gaussian reduction you find the possible solutions to the equation Ax = b.
+
+Question 1 (b)
+x = [R(:,6);0;0]
+
+x =
+
+    0.7991
+    0.8846
+   -0.2179
+         0
+         0
+
+(i) Use properties of row reduction to explain why x satisfies the equation Ax = b?
+THis gives you the possible solutions for the equation. When you do find the solution, A*x-b will equal to 0 because you 
+have satisfied the solution
+
+(A*x)-b
+
+ans =
+
+   1.0e-14 *
+
+         0
+    0.1776
+         0
+
+Question 1 (c)
+
+S =
+
+    1.0000         0         0    0.3305   -0.1410
+         0    1.0000         0    0.2821    0.9615
+         0         0    1.0000    0.6068    0.0385
+
+u = [-S(:,4);1;0]
+
+u =
+
+   -0.3305
+   -0.2821
+   -0.6068
+    1.0000
+         0
+
+v =[-S(:,5);0;1]
+
+v =
+
+    0.1410
+   -0.9615
+   -0.0385
+         0
+    1.0000
+
+(i) Give a handwritten explanation, using symbols and linear algebra, rather than numbers, to show why u and v are the vectors that appear in the vector form of the general solution to Ax = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+s = rand(1)
+
+s =
+
+    0.0357
+
+t = rand(1), y = s*u + t*v
+
+t =
+
+    0.8491
+
+
+y =
+
+    0.1079
+   -0.8265
+   -0.0543
+    0.0357
+    0.8491
+
+(ii) What properties of matrix and vector algebra ensure that Ay = 0?
+Either A is a [0] ( a zero matrix) or y  is a zero vector. When you do all the operations you obtain the vela zero
+
+
+A*y
+
+ans =
+
+   1.0e-15 *
+
+    0.1110
+   -0.4441
+         0
+
+Quesiton 1 (d)
+z = x + y
+
+z =
+
+    0.9071
+    0.0581
+   -0.2723
+    0.0357
+    0.8491
+
+(i) What properties of matrix and vector algebra imply that Az = b?
+
+
+A*z -b
+
+ans =
+
+   1.0e-15 *
+
+         0
+         0
+   -0.8882
+
+A*z - b
+
+ans =
+
+   1.0e-15 *
+
+         0
+         0
+   -0.8882
+
+Question 2
+u1 = rvect(3), u2 = rvect(3), u3 = rvect(3), u4 = rvect(3)
+
+u1 =
+
+     9
+     6
+     7
+
+
+u2 =
+
+     7
+     3
+     6
+
+
+u3 =
+
+     1
+     7
+     0
+
+
+u4 =
+
+     2
+     0
+     0
+
+Question 2 (a)
+A = [u1 u2 u3]
+
+A =
+
+     9     7     1
+     6     3     7
+     7     6     0
+
+R = rref(A)
+
+R =
+
+     1     0     0
+     0     1     0
+     0     0     1
+
+(i) How many free variables does the equation Ax = 0?
+0
+(ii) Is the set S linearly independent or leanly dependent? Why?
+independent b/ Ax =0 has no nonzero solutions
+(iii) What is the rank of A?
+3
+(iv) What is the nullity of A?
+0
+Question 2 (b)
+ 
+A=[u1 u2 u3 u4]
+
+A =
+
+     9     7     1     2
+     6     3     7     0
+     7     6     0     0
+
+R = rref(A)
+
+R =
+
+    1.0000         0         0    4.2000
+         0    1.0000         0   -4.9000
+         0         0    1.0000   -1.5000
+
+How many free variables does the equation Ax = 0 have?
+3
+
+Is the set S leanearly independent or linearly dependent? Give a reason for your answer.
+Dependent b/c in this case Ax=0 does have nonzero solutions
+What is the Rank of A?
+3
+What is the nullity of A?
+1
+Question 2 (c)
+v = rand(1)*u1 + rand(1)*u2
+
+v =
+
+   12.2749
+    7.0252
+    9.9332
+
+Is S linearly independent or linearly dependent?
+S is dependent b/c also in this case a solution is found for Ax=0. 
+A = [u1 u2 v]
+
+A =
+
+    9.0000    7.0000   12.2749
+    6.0000    3.0000    7.0252
+    7.0000    6.0000    9.9332
+
+
+rref(A)
+
+ans =
+
+    1.0000         0    0.8235
+         0    1.0000    0.6948
+         0         0         0
+
+ans = R
+
+ans =
+
+    1.0000         0         0    4.2000
+         0    1.0000         0   -4.9000
+         0         0    1.0000   -1.5000
+
+R = rref(A)
+
+R =
+
+    1.0000         0    0.8235
+         0    1.0000    0.6948
+         0         0         0
+
+R =
+
+    1.0000         0    0.8235
+         0    1.0000    0.6948
+         0         0         0
+
+Question 3
+A = rmat(2,3), B = rmat(3,4), C = rmat(4,3), v = rvect(4)
+
+A =
+
+     3     0     3
+     9     4     7
+
+
+B =
+
+     7     4     7     6
+     1     6     2     1
+     4     7     6     1
+
+
+C =
+
+     4     2     6
+     9     7     8
+     3     2     9
+     5     5     5
+
+
+v =
+
+     1
+     1
+     2
+     8
+
+Question 3 (a) Associativity
+u = B*v, A*u, D = A*v, D*v
+
+u =
+
+    73
+    19
+    31
+
+
+ans =
+
+   312
+   950
+
+
+u = B*v
+
+u =
+
+    73
+    19
+    31
+
+A*u
+
+ans =
+
+   312
+   950
+
+D = A*B
+
+D =
+
+    33    33    39    21
+    95   109   113    65
+
+
+D*v
+
+ans =
+
+   312
+   950
+
+A*(B*C)
+
+ans =
+
+         651         480         918
+        2025        1504        2784
+
+(A*B)*C
+
+ans =
+
+         651         480         918
+        2025        1504        2784
+
+A*(B*C)=(A*B)*C
+Question 3 (b)
+A = [0 1;0 0], B = [0 0 ; 1 0], C = [0 1; 1 0]
+
+A =
+
+     0     1
+     0     0
+
+
+B =
+
+     0     0
+     1     0
+
+
+C =
+
+     0     1
+     1     0
+
+(i) Is AB = BA? Is (A + B)^2 = A^2 + 2AB + B^2
+No AB and BA does not equal one another b/c you are doing two different operations in both cases. Same goes for (A + B)^2 = A^2 + 2AB + B^2.
+
+A*B
+
+ans =
+
+     1     0
+     0     0
+
+B*A
+
+ans =
+
+     0     0
+     0     1
+% Addiitonal
+AB is not Equal to BA
+(A + B)^2
+
+ans =
+
+     1     0
+     0     1
+
+
+A^2 + 2*A*B + B^2
+
+ans =
+
+     2     0
+     0     0
+
+(ii) Calculate A^2. If A were a number instead of a matrix, what would the value of A^2 tell you about the value of A? Is this conclusion valid for matrices?
+When you square a matrix you must have the amount of columns and rows (m = n). With a value of A squares you can square it with out worrying bout columns and rows b/c it is not a matrix.
+
+A^2
+
+ans =
+
+     0     0
+     0     0
+
+3^2
+
+ans =
+
+     9
+
+(iii) Calculate AC and compare it with AB, If A,B,C were numbers with A not = 0, what would you conclude about B and C form this calculation? IS this conclusion valid for matrices?
+AC and AB are the same matrix thus equal one another AC=AB. 
+
+A*C
+
+ans =
+
+     1     0
+     0     0
+
+A*B
+
+ans =
+
+     1     0
+     0     0
+
+Question 4
+
+
+(f) There isn't anyone who did no receive at least one phone call. The reason I know this is b/c when I transpose A and then multiply it by A I am able to how many calls each person has received
+
+
+
+
+A = [ 0 1 0 1 1 0; 0 0 1 0 1 0; 0 1 0 1 1 1; 1 1 1 0 0 1; 1 0 0 0 1 0]
+
+A =
+
+     0     1     0     1     1     0
+     0     0     1     0     1     0
+     0     1     0     1     1     1
+     1     1     1     0     0     1
+     1     0     0     0     1     0
+
+A'
+
+ans =
+
+     0     0     0     1     1
+     1     0     1     1     0
+     0     1     0     1     0
+     1     0     1     0     0
+     1     1     1     0     1
+     0     0     1     1     0
+A =
+
+     0     1     0     1     1     0
+     0     0     1     0     1     0
+     0     1     0     1     1     1
+     1     1     1     0     0     1
+     0     0     0     0     0     0
+     1     0     0     0     1     0
+
+A'
+
+ans =
+
+     0     0     0     1     0     1
+     1     0     1     1     0     0
+     0     1     0     1     0     0
+     1     0     1     0     0     0
+     1     1     1     0     0     1
+     0     0     1     1     0     0
+
+ 
+A'*A
+
+ans =
+
+     2     1     1     0     1     1
+     1     3     1     2     2     2
+     1     1     2     0     1     1
+     0     2     0     2     2     1
+     1     2     1     2     4     1
+     1     2     1     1     1     2
+
+A^2
+
+ans =
+
+     1     1     2     0     1     1
+     0     1     0     1     1     1
+     2     1     2     0     2     1
+     1     2     1     2     4     1
+     0     0     0     0     0     0
+     0     1     0     1     1     0

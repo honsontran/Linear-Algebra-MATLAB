@@ -1,0 +1,345 @@
+format compact
+% Honson Tran
+% 9179
+% Section C2
+% Math 250 MATLAB Lab Assignment #2
+rand('seed', 9179)
+% Question 1(a)
+A = rmat(3, 5)
+A =
+     9     4     4     6     2
+     7     6     7     7     0
+     2     0     3     6     8
+rank(A(:,1:3))
+ans =
+     3
+b = rvect(3)
+b =
+     8
+     9
+     1
+R = rref([A b])
+R =
+    1.0000         0         0    0.5581    0.7907    0.4651
+         0    1.0000         0   -1.3837   -3.4186    0.9302
+         0         0    1.0000    1.6279    2.1395    0.0233
+S = R(:, 1:5)
+S =
+    1.0000         0         0    0.5581    0.7907
+         0    1.0000         0   -1.3837   -3.4186
+         0         0    1.0000    1.6279    2.1395
+% i) The pivot columns are columns 1, 2, and 3.
+rank(R)
+ans =
+     3
+rank(A)
+ans =
+     3
+% ii) The rank of R and A are the same.
+% iii) The nullity of A is 2. Rank(A) + Nullity(A) = 5, so nullity would be 2.
+% The free variables would be those that aren't pivot columns.
+% x4 and x5 are free variables
+% iv) Since there is not a pivot in every column of the matrix
+% and there are free variables, we know that Ax = b has an
+% infinite many solutions.
+% Question 1(b)
+c = R(:,6)
+c =
+    0.4651
+    0.9302
+    0.0233
+x = [c; 0; 0]
+x =
+    0.4651
+    0.9302
+    0.0233
+         0
+         0
+% Question 1(b) i)
+A*x-b
+ans =
+     0
+     0
+     0
+S*x-c
+ans =
+     0
+     0
+     0
+% ii) The equations both equal zero because the matrix equation Ax=b has the same
+% solutions as Rx=c, where [R c] is the rref of the augmented matrix [A b].
+% Question 1(c)
+u = [-S(:,4); 1; 0]
+u =
+   -0.5581
+    1.3837
+   -1.6279
+    1.0000
+         0
+v = [-S(:,5); 0; 1]
+v =
+   -0.7907
+    3.4186
+   -2.1395
+         0
+    1.0000
+% i) In general, give a linear system Ax=0, you can write the solution in
+% parametric form, which is x = ut_1 + vt_2 such that Ax=A(ut_1+vt_2) = 
+% A(ut_1)+A(vt_2)=0. This is why u and v are vectors appearing in the
+% solution of Ax=0.
+s = rand(1)
+s =
+    0.9134
+t = rand(1)
+t =
+    0.6324
+y = s*u + t*v
+y =
+   -1.0098
+    3.4256
+   -2.8398
+    0.9134
+    0.6324
+% Ay =0 when A is a zero matrix or y is a zero vector.
+A*y
+ans =
+   1.0e-14 *
+   -0.2665
+   -0.3553
+   -0.0888
+% Question 1(d)
+z = x + y
+z =
+   -0.5447
+    4.3559
+   -2.8166
+    0.9134
+    0.6324
+% By matrix multiplication rules, with A being  an m x n matrix, and e_j is the 
+% jth standard vector in R^n, Ae_j = a_j.
+A*z-b
+ans =
+   1.0e-15 *
+         0
+         0
+   -0.8882
+% Question 2
+u1 = rvect(3)
+u1 =
+     0
+     2
+     5
+u2 = rvect(3)
+u2 =
+     9
+     9
+     1
+u3 = rvect(3)
+u3 =
+     9
+     9
+     4
+u4 = rvect(3)
+u4 =
+     8
+     1
+     4
+% Question 2(a)
+A = [u1 u2 u3]
+A =
+     0     9     9
+     2     9     9
+     5     1     4
+rref(A)
+ans =
+     1     0     0
+     0     1     0
+     0     0     1
+% i) The equation Ax = 0 has 0 free variables
+% ii) The set S is independet because Ax = 0 has no nonzero solutions
+% Question 2(b)
+B = [u1 u2 u3 u4]
+B =
+     0     9     9     8
+     2     9     9     1
+     5     1     4     4
+rref(B)
+ans =
+    1.0000         0         0   -3.5000
+         0    1.0000         0   -5.9815
+         0         0    1.0000    6.8704
+% i) Bx = 0 has 3 free variables
+% ii) The set T is dependent because there are nonzero solutions present.
+% Question 2(c)
+v = rand(1)*u1 + rand(1)*u2
+v =
+    7.1299
+    8.9613
+    5.3709
+% The set U is dependent since there's a solution for Ax = 0.
+V = [u1 u2 v]
+V =
+         0    9.0000    7.1299
+    2.0000    9.0000    8.9613
+    5.0000    1.0000    5.3709
+rref(V)
+ans =
+    1.0000         0    0.9157
+         0    1.0000    0.7922
+         0         0         0
+% Question 3
+A = rmat(2,3), B = rmat(3,4), C = rmat(4,3), v = rvect(4)
+A =
+     7     5     0
+     3     0     5
+B =
+     7     5     3     3
+     9     4     1     5
+     1     0     7     1
+C =
+     6     7     9
+     2     4     1
+     6     0     8
+     6     2     5
+v =
+     9
+     0
+     4
+     1
+% Question 3(a)
+u = B*v, A*u, D = A*B, D*v
+u =
+    78
+    90
+    38
+ans =
+   996
+   424
+D =
+    94    55    26    46
+    26    15    44    14
+ans =
+   996
+   424
+A*(B*C)
+ans =
+        1106         970        1339
+         534         270         671
+(A*B)*C
+ans =
+        1106         970        1339
+         534         270         671
+% This implies that A*(B*C)=(A*B)*C
+% Question 3(b)
+A = [0 1;0 0], B = [0 0 ; 1 0], C = [0 1; 1 0]
+A =
+     0     1
+     0     0
+B =
+     0     0
+     1     0
+C =
+     0     1
+     1     0
+% i) Although AB = BA and (A+B)^2 are true if A and B were numbers, but they are false
+% when it comes to matrices. Matrix multiplication does not have a commutative
+% property. This is because A and B could have different dimensions when multiplying.
+% Additionally, the order the values in the matrices wouldn't be multiplied with the 
+% same numbers as A*B if you were to multiply B*A.
+A*B
+ans =
+     1     0
+     0     0
+B*A
+ans =
+     0     0
+     0     1
+(A + B)^2
+ans =
+     1     0
+     0     1
+A^2 + 2*A*B + B^2
+ans =
+     2     0
+     0     0
+% ii) In order to square a matrix, the number of rows and columns must be the same.
+% That means if a matrix that is squared is defined, you know that it has the same
+% numbers of rows and columns. On the other hand, squaring just a number is care-free
+% of these conditions.
+A^2
+ans =
+     0     0
+     0     0
+7^2
+ans =
+    49
+% iii) AC and AB's product matrix came out to the the same. Therefore, AC=AB.
+A*C
+ans =
+     1     0
+     0     0
+A*B
+ans =
+     1     0
+     0     0
+% Question 4
+A = [ 0 0 0 1 0 1; 1 0 1 1 0 0; 0 1 0 1 0 0; 1 0 1 0 0 0; 1 1 1 0 0 1; 0 0 1 1 0 0]
+A =
+     0     0     0     1     0     1
+     1     0     1     1     0     0
+     0     1     0     1     0     0
+     1     0     1     0     0     0
+     1     1     1     0     0     1
+     0     0     1     1     0     0
+% ii) By looking at the upper triangle of the matrix, we can see that:
+% a12, a13, a15, a25, a25, a35, a36, a45, a46 are all 0.
+% Therefore, we can say that Person 1 and person 2 can't send a message, and
+% vice versa. Person 1 and 3 can't as well and vice versa, etc.
+% iii) For the first stage, we can consider person 1 and person 4 (a14) and
+% see that there is only one way in one stage to send message.
+% Now, let's look at A^2.
+A^2
+ans =
+     1     0     2     1     0     0
+     1     1     1     2     0     1
+     2     0     2     1     0     0
+     0     1     0     2     0     1
+     1     1     2     4     0     1
+     1     1     1     1     0     0
+% Now we still see that for the second stage, Person 1 can only send a message
+% to person 4 in one way in two stages.
+% Now, we look at stage 3 (A^3)
+A^3
+ans =
+     1     2     1     3     0     1
+     3     1     4     4     0     1
+     1     2     1     4     0     2
+     3     0     4     2     0     0
+     5     2     6     5     0     1
+     2     1     2     3     0     1
+% Now we see that for the second stage, Person 1 can only send a message to
+% person 4 in 3 ways in 3 stages
+% Finally, let's look at stage 4 (A^4)
+A^4
+ans =
+     5     1     6     5     0     1
+     5     4     6     9     0     3
+     6     1     8     6     0     1
+     2     4     2     7     0     3
+     7     6     8    14     0     5
+     4     2     5     6     0     2
+% Now, we see that for the second stage, Person 1 can only send a message to
+% person 4 in 5 ways in 4 stages
+% iv) To find out the number of ways person 3 can send a message to person 4 with
+% the very most 4 stages, we use A + A^2 + A^3 + A^4 and observe a34 for its value.
+A + A^2 + A^3 + A^4
+ans =
+     7     3     9    10     0     3
+    10     6    12    16     0     5
+     9     4    11    12     0     3
+     6     5     7    11     0     4
+    14    10    17    23     0     8
+     7     4     9    11     0     3
+% We can see that the value is 12.
+% Therefore, there are 12 ways that person 3 can send a message to person 4 in
+% 4 stages max.

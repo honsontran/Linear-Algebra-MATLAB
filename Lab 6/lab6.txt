@@ -1,0 +1,282 @@
+% Honson Tran
+% 9179
+% Section C2
+% Math 250 MATLAB Lab Assignment #6
+format compact
+rand('seed', 9179)
+% Question 1
+u = rvect(2), v = rvect(2)
+u =
+     9
+     7
+v =
+     2
+     4
+rank([u, v])
+ans =
+     2
+% Question 1(a)
+% The triangular inequalities state that ||u+v|| is equal to ||u|| + ||v||.
+norm(u)
+ans =
+   11.4018
+norm(v)
+ans =
+    4.4721
+norm(u+v)
+ans =
+   15.5563
+norm(v) + norm(u)
+ans =
+   15.8739
+% Given computer error of rounding numbers, the given formula given above is true.
+% Question 1(b)
+% The Cauchy-Schwarz Inequality states the absolute value of the dot 
+% product of two vectors is less than or equal to the dot products of the
+% norms of those vectors.abs(u'*v)
+ans =
+    46
+norm(u)'*norm(v)
+ans =
+   50.9902
+% This shows the above statement is true. The absolute value of the dot
+% product is less than or equal to the dot product of the norms of those
+% vectors.
+% Question 1(c)
+w=((u'*v)/(v'*v))*v
+w =
+    4.6000
+    9.2000
+z=u-w
+z =
+    4.4000
+   -2.2000
+z'*v
+ans =
+   3.5527e-15
+% For numerical purposes, we consider this number 0, confirming that
+% z and v are orthogonal.
+% Question 1(d)
+P = v*inv(v'*v)*v'
+P =
+    0.2000    0.4000
+    0.4000    0.8000
+P = v*inv(v'*v)*v'
+% Since V is a 2x1 matrix, the product of v by its tranpose will be a
+% square matrix of nxn, where n is the m of v or the n of its transpose.
+P*u
+ans =
+    4.6000
+    9.2000
+w
+w =
+    4.6000
+    9.2000
+% Question 2
+u1=rvect(3), u2=rvect(3),u3=rvect(3)
+u1 =
+     6
+     0
+     4
+u2 =
+     7
+     3
+     6
+u3 =
+     7
+     6
+     2
+rank([u1,u2,u3])
+ans =
+     3
+% Question 2(a)
+r = 0:0.05:1; hold on
+plot3(r*u1(1),r*u1(2),r*u1(3), 'r:')
+plot3(r*u2(1),r*u2(2),r*u2(3), 'g:')
+plot3(r*u3(1),r*u3(2),r*u3(3), 'b:')
+% Visually, we can see the vectors aren't orthogonal
+% Question 2(b)
+v1=u1
+v1 =
+     6
+     0
+     4
+P1= v1*inv(v1'*v1)*v1', v2=u2-P1*u2
+P1 =
+    0.6923         0    0.4615
+         0         0         0
+    0.4615         0    0.3077
+v2 =
+   -0.6154
+    3.0000
+    0.9231
+v1'*v2
+ans =
+   3.5527e-15
+plot3(r*v2(1),r*v2(2),r*v2(3), 'g-.')
+P2 = v2*inv(v2'*v2)*v2', v3= u3-P1*u3-P2*u3
+P2 =
+    0.0370   -0.1805   -0.0555
+   -0.1805    0.8797    0.2707
+   -0.0555    0.2707    0.0833
+v3 =
+    2.1654
+    1.4436
+   -3.2481
+plot3(r*v3(1),r*v3(2),r*v3(3), 'b-.')
+% Question 2(c)
+w1= v1/norm(v1), w2=v2/norm(v2), w3 = v3/norm(v3)
+w1 =
+    0.8321
+         0
+    0.5547
+w2 =
+   -0.1924
+    0.9379
+    0.2886
+w3 =
+    0.5203
+    0.3468
+   -0.7804
+Q =[w1, w2, w3]
+Q =
+    0.8321   -0.1924    0.5203
+         0    0.9379    0.3468
+    0.5547    0.2886   -0.7804
+% i) Symbolically, Q^T*Q consists of orthogonal vectors of w1, w2, and
+% w3. The entries of Q^T*Q will be the dot products of the corrosponding rows
+% and columns from Q and Q^T. Each entry would be the dot product of w_i and
+% w_j where w_i is a row in matrix Q^T and w_j is a column in the matrix.
+% For an example, (1, 1) corresponds to row 1 column 1. since the columns of
+% Q are orthonormal, a dot product of any combinations of vectors of those
+% columns will be equal to zero.
+% Since the rows of Q^T are the same as the columns of Q, then the result will
+% be the dot product of orthonormal vectors which are 0, except for the diagonal
+% which are just dot products of themselves (equals 1).
+% This describes the orthonormal property of {w1,w2,w2} as Q^T*Q:
+% If an orthogonal matrix (in which the columns are orthonormal to each other),
+% then Q^T*Q is equal to the identity matrix.
+% ii) Q^-1 is equal to QT by definition if Q is an orthogonal matrix. Therefore,
+% its inverse has to be equal to its transpose.transpose(Q)*Q
+ans =
+    1.0000    0.0000   -0.0000
+    0.0000    1.0000   -0.0000
+   -0.0000   -0.0000    1.0000
+inv(Q)
+ans =
+    0.8321   -0.0000    0.5547
+   -0.1924    0.9379    0.2886
+    0.5203    0.3468   -0.7804
+% Question 2(d)
+A = [u1, u2, u3]
+A =
+     6     7     7
+     0     3     6
+     4     6     2
+R =Q'*A
+R =
+    7.2111    9.1526    6.9338
+    0.0000    3.1986    4.8580
+   -0.0000   -0.0000    4.1621
+Q*R
+ans =
+    6.0000    7.0000    7.0000
+    0.0000    3.0000    6.0000
+    4.0000    6.0000    2.0000
+% iii) R is an upper triangle since each entry is the dot product of the
+% corresponding columns of A and the orthonormal columns of Q.
+% Because the dot product of w2 and u1, which are the 2nd orthogonal column
+% of Q and 1st column of A is 0. Therefore, entry (2,1) of R is 0.
+% If we have a 3x3 matrix we will have an upper triangle if the entries
+% (2,1), (3,1) and (3,2) entries are zero.
+% Question 3
+a1=rvect(5); a2=rvect(5); a3= rvect(5); A=[a1,a2,a3]
+A =
+     0     3     4
+     8     4     4
+     1     9     2
+     1     5     7
+     9     4     7
+rank(A)
+ans =
+     3
+% Question 3(a)
+Q = grams(A); w1=Q(:,1), w2=Q(:,2), w3 = Q(:,3)
+w1 =
+         0
+    0.6598
+    0.0825
+    0.0825
+    0.7423
+w2 =
+    0.2981
+   -0.0460
+    0.8390
+    0.4414
+   -0.1014
+w3 =
+    0.4223
+   -0.2421
+   -0.5019
+    0.6880
+    0.1945
+Q'*Q
+ans =
+    1.0000    0.0000   -0.0000
+    0.0000    1.0000   -0.0000
+   -0.0000   -0.0000    1.0000
+% This is an orthonormal set because the result is an identity matrix.
+% Question 3(b)
+P = w1*w1' + w2*w2' + w3*w3'
+P =
+    0.2672   -0.1159    0.0382    0.4222    0.0519
+   -0.1159    0.4961    0.1373   -0.1324    0.4474
+    0.0382    0.1373    0.9625    0.0319   -0.1215
+    0.4222   -0.1324    0.0319    0.6751    0.1503
+    0.0519    0.4474   -0.1215    0.1503    0.5991
+v = rvect(5)
+v =
+     8
+     7
+     2
+     0
+     9
+w = P*v, z = v-w
+w =
+    1.8697
+    6.8462
+    2.0987
+    3.8666
+    8.6961
+z =
+    6.1303
+    0.1538
+   -0.0987
+   -3.8666
+    0.3039
+P*w
+ans =
+    1.8697
+    6.8462
+    2.0987
+    3.8666
+    8.6961
+P*z
+ans =
+   1.0e-14 *
+   -0.0622
+    0.0525
+   -0.1428
+   -0.0395
+    0.0675
+% Question 1(c)
+PW = A*inv(A'*A)*A'
+PW =
+    0.2672   -0.1159    0.0382    0.4222    0.0519
+   -0.1159    0.4961    0.1373   -0.1324    0.4474
+    0.0382    0.1373    0.9625    0.0319   -0.1215
+    0.4222   -0.1324    0.0319    0.6751    0.1503
+    0.0519    0.4474   -0.1215    0.1503    0.5991
+norm(PW-P)
+ans =
+   4.2425e-16

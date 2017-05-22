@@ -1,0 +1,87 @@
+v = rvect(3)
+v =
+     8
+     9
+     1
+diary lab2.txt
+A = RMAT(3, 5)
+{Cannot find an exact (case-sensitive) match for 'RMAT'
+
+The closest match is: rmat in D:\Users\iFai1x\Dropbox\Intro to Linear
+Algebra\Lab 2\rmat.m
+} 
+A = rmat(3, 5)
+A =
+     9     2     9     9     1
+     6     5     1     4     4
+     0     9     9     8     9
+clc
+diary lab2.txt
+A =
+ A =
+    
+{Error: Expression or statement is incomplete or incorrect.
+} 
+A =
+ A =
+    
+{Error: Expression or statement is incomplete or incorrect.
+} 
+A = [9     4     4     6     2;
+     7     6     7     7     0;
+     2     0     3     6     8]
+
+A =
+
+     9     4     4     6     2
+     7     6     7     7     0
+     2     0     3     6     8
+
+diary lab2.txt
+clc
+diary lab2.txt
+u = B*v, A*u, D = A*v, D*v
+u =
+    61
+   111
+    71
+ans =
+        1188
+        1680
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.} 
+u = B*v, A*u, D = A*v, D*v
+u =
+    61
+   111
+    71
+ans =
+        1188
+        1680
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.} 
+A*v
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.} 
+A*B
+ans =
+    90   117     0    54
+   116    86    16   100
+A*u
+ans =
+        1188
+        1680
+D*v
+{Undefined function or variable 'D'.} 
+B*v
+ans =
+    61
+   111
+    71
+clc
+diary lab2.txt
+diary lab2.txt
+diary lab2.txt
+diary lab2.txt
+clc
+diary lab2.txt
